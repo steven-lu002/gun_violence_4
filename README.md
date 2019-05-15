@@ -10,9 +10,9 @@ The dataset that we are going to use is from a github repo containing csv files 
 #### Target Audience
 Our target audiences are State legislatures looking at gun control laws and parents looking at gun statistics based on age, and anyone concerned with their safety regarding gun violence cases. This is due to the impact that this analysis could have. The correlation between gun types and violence results could assist in determining the potential gun control laws and the impacted age group could be informative for parents looking for gun statistics.
 #### Major Questions
--How many guns used in violence are stolen versus legally bought?
--How does the type of gun affect the number of killed/ injured within a given incident.
--What is the most impacted age group (victims/ participants) in different regions?
+- How many guns used in violence are stolen versus legally bought?
+- How does the type of gun affect the number of killed/ injured within a given incident.
+- What is the most impacted age group (victims/ participants) in different regions?
 
 ### Technical Description
 #### Reading the Data
@@ -24,6 +24,6 @@ Other than the common libraries that will used to wrangle data such as dplyr and
 #### What questions, if any, will you be answer with statistical analysis/ machine learning
 Our analysis will mostly be through statistical analysis between the correlation within the data. Our conclusions will attempt to determine if there is correlation present and whether or not that result is due to causation. The correlation that we are attempting to examine will be the connection between weapon type and the number of victims as well as violence with legally bought guns versus stolen/ black-market weapons.
 #### Major Challenges
--Due to the large nature of our data, the time it might take to sort and filter the data will be time consuming. The graphics and data wrangling may take a significant amount of time due to the varying processing powers within our computers.
--The data itself may have some incomplete entries which will be difficult to navigate, we will have to decide whether to omit the data or to mutate it in a way to filter the various missing entries.
--Time commitments and scheduling conflicts that each person has may restrict the amount of time we have to work together.
+- Due to the large nature of our data, the time it might take to sort and filter the data will be time consuming. The graphics and data wrangling may take a significant amount of time due to the varying processing powers within our computers.
+- The data itself may have some incomplete entries which will be difficult to navigate, we will have to decide whether to omit the data or to mutate it in a way to filter the various missing entries.
+- Time commitments and scheduling conflicts that each person has may restrict the amount of time we have to work together.
