@@ -26,7 +26,8 @@ shinyUI(fluidPage(
         choices = c("Killed", "Injured")
       )
     ),
-  
+  # maybe add a select box to change the different types of weapons allowed on the x axis?
+  # idk how to do this right now, ask during lab tomorrow
     mainPanel(
        plotOutput("distPlot")
     )

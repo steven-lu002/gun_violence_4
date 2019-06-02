@@ -14,7 +14,7 @@ library(plotly)
 stage2 <- read.csv("question2.csv", stringsAsFactors = F)
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
-   
+  # if statement seems kinda unnecessary, but i couldn't get the code to work any other way.
   output$distPlot <- renderPlot({
      ggplot(stage2, aes(gun_type, 
       if(input$status == "Killed"){
