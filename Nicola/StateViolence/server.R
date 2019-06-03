@@ -13,6 +13,7 @@ library(dplyr)
 library(DT)
 library(tidyverse)
 
+data <- read.csv('./complete.stage2.2017.csv', stringsAsFactors = FALSE)
 filtered <- data %>%
     drop_na(longitude, latitude) %>%
     select(

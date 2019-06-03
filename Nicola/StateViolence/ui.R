@@ -24,7 +24,7 @@ choicesList <- state_names_array()
 shinyUI(fluidPage(
     fluidRow(column(4),
              column(
-                 6,
+                 8,
                  titlePanel('Gun Violence by State and City')
              )),
     
@@ -44,7 +44,7 @@ shinyUI(fluidPage(
             )
         ),
         
-        column(6, leafletOutput("plot"))
+        column(8, leafletOutput("plot"))
     ),
     fluidRow(
         column(1),
@@ -54,6 +54,6 @@ shinyUI(fluidPage(
                    label = h3("Select State"),
                    choices = choicesList,
                )),
-        column(6, dataTableOutput("table"))
+        column(8, dataTableOutput("table"))
     ))
 ))
