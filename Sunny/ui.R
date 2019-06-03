@@ -30,8 +30,10 @@ shinyUI(fluidPage(
     # Show a plot of the generated distribution
     mainPanel(
        plotOutput("gun_stolen_plot"),
+       textOutput("text_1"),
        plotOutput("gun_stolen_plot2"),
-       plotOutput("gun_stolen_plot3")
+       plotOutput("gun_stolen_plot3"),
+       textOutput("text_2")
     )
   )
 ))

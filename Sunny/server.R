@@ -68,5 +68,13 @@ shinyServer(function(input, output) {
             title = element_text(size = 10, face = "bold")) +
       guides(fill=guide_legend(title = "Stolen Guns - Injured people"))
   })
+  
+  output$text_1 <- renderText({
+    paste('The map shows the distrubution of stolen gun used in violence at U.S')
+  })
+  
+  output$text_2 <- renderText({
+    paste('Percentage of killed and injured people in gun violence are higher when the stolen guns were used')
+  })
 })
 
