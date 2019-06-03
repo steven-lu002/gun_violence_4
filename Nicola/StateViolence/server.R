@@ -10,8 +10,11 @@
 library(shiny)
 library(leaflet)
 library(dplyr)
+library(DT)
+library(tidyverse)
 
 filtered <- data %>%
+    drop_na(longitude, latitude) %>%
     select(
         state,
         city_or_county,
@@ -20,8 +23,9 @@ filtered <- data %>%
         participant_age_group,
         participant_status,
         participant_type
-    )
-filtered <- filtered %>%
+    ) %>%
+    rename(State = state) %>%
+    rename(City = city_or_county) %>%
     mutate('Adult' = str_detect(participant_age_group, coll('Adult'))) %>%
     mutate('Teen' = str_detect(participant_age_group, coll('Teen'))) %>%
     mutate('Child' = str_detect(participant_age_group, coll('Child')))
@@ -32,7 +36,25 @@ teen_data <- filtered %>%
 child_data <- filtered %>%
     filter(Child == TRUE)
 
-# Define server logic required to draw a histogram
+getCrimeCount <- function(data, city_or_state) {
+    if (city_or_state == 'State') {
+        data <- data %>%
+            group_by(State) %>%
+            summarise(n()) %>%
+            rename(Count = 'n()') %>%
+            arrange(desc(Count))
+        return(data)
+    } else {
+        data <- data %>%
+            group_by(City) %>%
+            summarise(n()) %>%
+            rename(Count = 'n()') %>%
+            arrange(desc(Count)) %>%
+            rename('City/County' = City)
+        return(data)
+    }
+}
+
 shinyServer(function(input, output) {
     getMapType <- reactive({
         if (input$radio == 'adult') {
@@ -46,21 +68,20 @@ shinyServer(function(input, output) {
     
     getTableType <- reactive({
         if (input$radio == 'adult') {
-            adult_data <- adult_data %>%
-                group_by(state) %>%
-                summarise(n())
-            return(adult_data)
+            data <- adult_data
         } else if (input$radio == 'teen') {
-            teen_data <- teen_data %>%
-                group_by(state) %>%
-                summarise(n())
-            return(teen_data)
+            data <- teen_data
         } else {
-            child_data <- child_data %>%
-                group_by(state) %>%
-                summarise(n())
-            return(child_data)
+            data <- child_data
         }
+        if (input$select == 'National') {
+            getCrimeCount(data, 'State')
+        } else {
+            data <- data %>%
+                        filter(State == input$select)
+            getCrimeCount(data, 'City')
+        }
+        
     })
     
     output$plot <- renderLeaflet({
@@ -71,6 +92,8 @@ shinyServer(function(input, output) {
         )
     })
     
-    output$table <- renderDataTable(getTableType())
+    output$table <- renderDataTable({
+        getTableType()
+    })
     
 })

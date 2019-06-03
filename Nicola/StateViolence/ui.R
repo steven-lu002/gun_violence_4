@@ -8,9 +8,11 @@
 #
 
 library(shiny)
+library(leaflet)
+library(DT)
 
 state_names_array <- function() {
-    choices <- list()
+    choices <- list('National' = 'National')
     for (i in 1:length(state.name)) {
         choices[[state.name[i]]] <- state.name[i]
     }
@@ -22,12 +24,14 @@ choicesList <- state_names_array()
 shinyUI(fluidPage(
     fluidRow(column(4),
              column(
-                 4,
+                 6,
                  titlePanel('Gun Violence by State and City')
              )),
     
-    sidebarLayout(
-        sidebarPanel(
+    sidebarLayout(fluidRow(
+        column(1),
+        column(
+            4,
             radioButtons(
                 "radio",
                 label = h3("Choose Data"),
@@ -37,23 +41,19 @@ shinyUI(fluidPage(
                     "Child (0-11)" = 'child'
                 ),
                 selected = 'adult'
-            ),
-            hr(),
-            fluidRow(column(3, verbatimTextOutput("state")))
+            )
         ),
         
-        mainPanel(leafletOutput("plot"))
+        column(6, leafletOutput("plot"))
     ),
-    sidebarLayout(
-        sidebarPanel(
-            selectInput(
-                "select",
-                label = h3("Select State"),
-                choices = choicesList,
-            ),
-            hr(),
-            fluidRow(column(3, verbatimTextOutput("state")))
-        ),
-        mainPanel(dataTableOutput("table"))
-    )
+    fluidRow(
+        column(1),
+        column(4,
+               selectInput(
+                   "select",
+                   label = h3("Select State"),
+                   choices = choicesList,
+               )),
+        column(6, dataTableOutput("table"))
+    ))
 ))
