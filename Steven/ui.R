@@ -15,7 +15,7 @@ library(DT)
 stage2 <- read.csv("question2.csv", stringsAsFactors = F)
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
-  theme = shinytheme("cerulean"),
+  theme = shinytheme("sandstone"),
   # Application title
   titlePanel("Gun Type vs. Killed/Injured"),
   
