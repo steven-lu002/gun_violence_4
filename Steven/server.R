@@ -39,7 +39,7 @@ shinyServer(function(input, output) {
       "}")#formatStyle(names(stage2), backgroundColor = styleInterval(brks, clrs))
       )
     ) 
-    
+    ###rounding?
     
   })
 })
