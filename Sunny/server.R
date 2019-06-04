@@ -18,8 +18,8 @@ library(maps)
 library(R.utils)
 library(mapproj)
 
-data <- paste0("./complete.stage2.2017.csv")
-data <- read.csv(data, stringsAsFactors = F)
+#data <- paste0("./complete.stage2.2017.csv")
+data <- read.csv('./complete.stage2.2017.csv', stringsAsFactors = FALSE)
 
 gun_data <- select(data, gun_stolen, longitude, latitude, n_killed, n_injured) %>% 
   filter(latitude > 20 & latitude <50) %>% 
