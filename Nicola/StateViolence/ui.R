@@ -44,7 +44,7 @@ shinyUI(fluidPage(
             )
         ),
         
-        column(8, leafletOutput("plot"))
+        column(12, leafletOutput("plot"))
     ),
     fluidRow(
         column(1),
@@ -54,6 +54,6 @@ shinyUI(fluidPage(
                    label = h3("Select State"),
                    choices = choicesList,
                )),
-        column(8, dataTableOutput("table"))
+        column(12, dataTableOutput("table"))
     ))
 ))
