@@ -11,6 +11,7 @@ library(shiny)
 library(dplyr)
 library(ggplot2)
 library(shinythemes)
+library(DT)
 stage2 <- read.csv("question2.csv", stringsAsFactors = F)
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
@@ -26,10 +27,9 @@ shinyUI(fluidPage(
         choices = c("Killed", "Injured")
       )
     ),
-  # maybe add a select box to change the different types of weapons allowed on the x axis?
-  # idk how to do this right now, ask during lab tomorrow
     mainPanel(
-       plotOutput("distPlot")
+       plotOutput("distPlot"),
+       dataTableOutput("mytable")
     )
   )
 ))

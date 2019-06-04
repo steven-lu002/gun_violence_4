@@ -12,7 +12,6 @@ library(dplyr)
 library(ggplot2)
 library(plotly)
 stage2 <- read.csv("question2.csv", stringsAsFactors = F)
-# Define server logic required to draw a histogram
 shinyServer(function(input, output) {
   # if statement seems kinda unnecessary, but i couldn't get the code to work any other way.
   output$distPlot <- renderPlot({
@@ -29,5 +28,7 @@ shinyServer(function(input, output) {
             title = element_text(size = 25, face = "bold")) +
       guides(fill=guide_legend(title = "Gun Types"))
   })
-  
+  output$mytable = DT::renderDataTable({
+    stage2
+  })
 })
