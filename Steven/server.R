@@ -28,7 +28,18 @@ shinyServer(function(input, output) {
             title = element_text(size = 25, face = "bold")) +
       guides(fill=guide_legend(title = "Gun Types"))
   })
-  output$mytable = DT::renderDataTable({
-    stage2
+  output$mytable = renderDataTable({
+    #fail attempt to make colors in boxes
+    #brks <- quantile(df, probs = seq(.05, .95, .05), na.rm = TRUE)
+    #clrs <- (round(seq(255, 40, length.out = length(brks) + 1), 0) )#%>% {paste0("rgb(255,", ., ",", ., ")")})
+    
+    datatable(stage2, options = list(initComplete = JS(
+      "function(settings, json) {",
+      "$(this.api().table().header()).css({'background-color': '#000', 'color': '#fff'});",
+      "}")#formatStyle(names(stage2), backgroundColor = styleInterval(brks, clrs))
+      )
+    ) 
+    
+    
   })
 })
