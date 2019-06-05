@@ -87,13 +87,37 @@ UI = fluidPage(theme = shinytheme("cosmo"),
                               and Milwaukee. The state with the highest amount of child incidents was Texas.'
                             )
                             )))
-                            ))
+                            ),
                
+                      tabPanel("Stolen Weapons",
+                               sidebarLayout(
+                                 sidebarPanel(
+                                   checkboxGroupInput("checkGroup", label = h3("Stolen vs. Unknown"), 
+                                                      choices = c("Unknown", "Stolen"), 
+                                                      selected = "Stolen"),
+                                   hr(),
+                                   fluidRow(
+                                     column(3, verbatimTextOutput("value"))
+                                   ),
+                                   textOutput("text_1"),
+                                   hr(),
+                                   textOutput("text_2"),
+                                   hr(),
+                                   textOutput("text_3")
+                                 ),
+                                 
+                                 # Show a plot of the generated distribution
+                                 mainPanel(
+                                   plotOutput("gun_stolen_plot"),
+                                   plotOutput("gun_stolen_plot2"),
+                                   plotOutput("gun_stolen_plot3")
+                                 )
+                               ))
+               )
                
-               
-                            )
+ )
 
-                          )
+                          
 
-                          )
+                          
 
