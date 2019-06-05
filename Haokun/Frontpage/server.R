@@ -219,4 +219,21 @@ shinyServer(function(input, output) {
     ###rounding?
     
   })
+  output$introduction <- renderText({
+    paste('The dataset that we are going to use is from a github repo containing csv files on gun violence.
+          This data is collected from gun violence archives and can be accessed from the csv files located 
+          on the repo. This data was collected through the use of python scripts in order to sort and clean 
+          the data. The filters include things such as incident, location, date, gun type, etc. Our project
+          answers three questions : How many guns used in violence are stolen versus legally bought?
+          How does the type of gun affect the number of killed/ injured within a given incident.
+          What is the most impacted age group (victims/ participants) in different regions?
+          Our target audiences are State legislatures looking at gun control laws and parents looking at gun 
+          statistics based on age, and anyone concerned with their safety regarding gun violence cases. This is due to
+          the impact that this analysis could have. The correlation between gun types and violence results could assist 
+          in determining the potential gun control laws and the impacted age group could be informative for parents looking 
+          for gun statistics. 
+          \n
+          This project is created by  Nicola Beirer, Steven Lu, Haokun Cai, Sunny Lee.
+          ')
+  })
   })

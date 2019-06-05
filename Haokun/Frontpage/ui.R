@@ -34,6 +34,14 @@ UI = fluidPage(
   # Show a plot of the generated distribution
   tabsetPanel(
     tabPanel(
+      "Introduction",
+      titlePanel('Introduction'),
+      fluidRow(
+        column(8,
+        textOutput("introduction"))
+      )
+    ),
+    tabPanel(
       "State and City",
       titlePanel('Gun Violence by State and City'),
       sidebarLayout(
