@@ -3,6 +3,7 @@ library(shinythemes)
 library(leaflet)
 library(DT)
 
+# Data Wrangling
 state_names_array <- function() {
   choices <- list('National (State)' = 'National_State')
   choices[['National (City)']] <- 'National_City'
@@ -14,18 +15,22 @@ state_names_array <- function() {
 
 choicesList <- state_names_array()
 
+# UI Page
 UI = fluidPage(
   theme = shinytheme("cosmo"),
   
   titlePanel("Gun Violence Analysis"),
   
+  # Tabs of different questions
   tabsetPanel(
+    # First Panel, Introduction
     tabPanel(
       "Introduction",
       titlePanel('Introduction'),
       fluidRow(column(8,
                       textOutput("introduction")))
     ),
+    # Second Panel, Gun Violence occurences
     tabPanel(
       "State and City",
       titlePanel('Gun Violence by State and City'),
@@ -46,6 +51,7 @@ UI = fluidPage(
           and Milwaukee. The state with the highest amount of child incidents was Texas.'
         )
       ))),
+      # Radio Buttons
       sidebarLayout(
         fluidRow(
           column(1),
@@ -63,8 +69,10 @@ UI = fluidPage(
             )
           ),
           
+          # Leaflet
           column(12, leafletOutput("plot"))
         ),
+        # Select Box
         fluidRow(
           column(1),
           column(4,
@@ -73,13 +81,16 @@ UI = fluidPage(
                    label = h3("Select State"),
                    choices = choicesList,
                  )),
+          # Data frame
           column(12, dataTableOutput("table"))
         )
       )
-        ),
+    ),
     
+    # Third Panel, Stolen Weapon Data
     tabPanel("Stolen Weapons",
              sidebarLayout(
+               # Checkbox
                sidebarPanel(
                  checkboxGroupInput(
                    "checkGroup",
@@ -89,6 +100,7 @@ UI = fluidPage(
                  ),
                  hr(),
                  fluidRow(column(3, verbatimTextOutput("value"))),
+                 # 3 Text Analysis
                  textOutput("text_1"),
                  hr(),
                  textOutput("text_2"),
@@ -96,15 +108,18 @@ UI = fluidPage(
                  textOutput("text_3")
                ),
                
+               # US Map Plot and 2 Bar Graphs
                mainPanel(
                  plotOutput("gun_stolen_plot"),
                  plotOutput("gun_stolen_plot2"),
                  plotOutput("gun_stolen_plot3")
                )
              )),
+    # Final Panel, Gun Type vs Injuries
     tabPanel(
       "Gun Type vs. Killed/Injured",
       sidebarLayout(
+        # Select Box
         sidebarPanel(
           selectInput(
             inputId = "status",
@@ -112,6 +127,7 @@ UI = fluidPage(
             choices = c("Killed", "Injured")
           ),
           
+          # Analysis
           h3(
             "How does the type of gun or caliber of the bullet affect
             the number of killed/ injured within a given incident?"
@@ -129,6 +145,7 @@ UI = fluidPage(
             highest on the injured charts.",
             align = "left"
           ),
+          # Image of guns to fill up space
           img(
             src = 'guns.png',
             width = "550px",
@@ -136,10 +153,11 @@ UI = fluidPage(
             alt = "different gun types",
             align = "left"
           )
-          ),
+        ),
+        # Bar graph and Data Table of Gun Types and Injuries/Deaths
         mainPanel(plotOutput("distPlot"),
                   dataTableOutput("mytable"))
-        )
       )
+    )
   )
 )

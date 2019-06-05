@@ -17,7 +17,8 @@ filtered <- data %>%
          city_or_county,
          latitude,
          longitude,
-         participant_age_group,) %>%
+         participant_age_group,
+  ) %>%
   rename(State = state) %>%
   rename(City = city_or_county) %>%
   mutate('Adult' = str_detect(participant_age_group, coll('Adult'))) %>%
@@ -111,7 +112,7 @@ shinyServer(function(input, output) {
   
   output$gun_stolen_plot <- renderPlot({
     sub <-
-      gun_data[which(gun_data$gun_stolen %in% input$checkGroup) , ]
+      gun_data[which(gun_data$gun_stolen %in% input$checkGroup) ,]
     state_shape <- map_data("state")
     ggplot(state_shape) +
       geom_polygon(mapping = aes(x = long, y = lat, group = group)) +
