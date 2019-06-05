@@ -1,17 +1,7 @@
-#
-# This is the user-interface definition of a Shiny web application. You can
-# run the application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
-
 library(shiny)
 library(shinythemes)
 library(leaflet)
 library(DT)
-# Define UI for application that draws a histogram
 
 state_names_array <- function() {
   choices <- list('National (State)' = 'National_State')
@@ -27,19 +17,14 @@ choicesList <- state_names_array()
 UI = fluidPage(
   theme = shinytheme("cosmo"),
   
-  # Application title
   titlePanel("Gun Violence Analysis"),
   
-  
-  # Show a plot of the generated distribution
   tabsetPanel(
     tabPanel(
       "Introduction",
       titlePanel('Introduction'),
-      fluidRow(
-        column(8,
-        textOutput("introduction"))
-      )
+      fluidRow(column(8,
+                      textOutput("introduction")))
     ),
     tabPanel(
       "State and City",
@@ -111,7 +96,6 @@ UI = fluidPage(
                  textOutput("text_3")
                ),
                
-               # Show a plot of the generated distribution
                mainPanel(
                  plotOutput("gun_stolen_plot"),
                  plotOutput("gun_stolen_plot2"),
@@ -156,9 +140,6 @@ UI = fluidPage(
         mainPanel(plotOutput("distPlot"),
                   dataTableOutput("mytable"))
         )
-        )
-    
-    
-        )
-  
       )
+  )
+)
