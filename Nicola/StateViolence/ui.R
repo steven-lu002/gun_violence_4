@@ -12,7 +12,8 @@ library(leaflet)
 library(DT)
 
 state_names_array <- function() {
-    choices <- list('National' = 'National')
+    choices <- list('National (State)' = 'National_State')
+    choices[['National (City)']] <- 'National_City'
     for (i in 1:length(state.name)) {
         choices[[state.name[i]]] <- state.name[i]
     }
@@ -40,7 +41,7 @@ shinyUI(fluidPage(
                     "Teen (12-17)" = 'teen',
                     "Child (0-11)" = 'child'
                 ),
-                selected = 'adult'
+                selected = 'teen'
             )
         ),
         

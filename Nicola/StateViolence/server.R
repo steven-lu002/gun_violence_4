@@ -13,18 +13,15 @@ library(dplyr)
 library(DT)
 library(tidyverse)
 
-data <- read.csv('./complete.stage2.2017.csv', stringsAsFactors = FALSE)
+data <-
+    read.csv('./complete.stage2.2017.csv', stringsAsFactors = FALSE)
 filtered <- data %>%
     drop_na(longitude, latitude) %>%
-    select(
-        state,
-        city_or_county,
-        latitude,
-        longitude,
-        participant_age_group,
-        participant_status,
-        participant_type
-    ) %>%
+    select(state,
+           city_or_county,
+           latitude,
+           longitude,
+           participant_age_group,) %>%
     rename(State = state) %>%
     rename(City = city_or_county) %>%
     mutate('Adult' = str_detect(participant_age_group, coll('Adult'))) %>%
@@ -75,11 +72,13 @@ shinyServer(function(input, output) {
         } else {
             data <- child_data
         }
-        if (input$select == 'National') {
+        if (input$select == 'National_State') {
             getCrimeCount(data, 'State')
+        } else if (input$select == 'National_City') {
+            getCrimeCount(data, 'City')
         } else {
             data <- data %>%
-                        filter(State == input$select)
+                filter(State == input$select)
             getCrimeCount(data, 'City')
         }
         
