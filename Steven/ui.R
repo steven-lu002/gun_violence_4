@@ -28,6 +28,8 @@ shinyUI(fluidPage(
         choices = c("Killed", "Injured")
       ),
      
+      h3("How does the type of gun or caliber of the bullet affect 
+         the number of killed/ injured within a given incident?"),
       
       h4("A few conclusions can be drawn from the type of gun as well as the caliber used 
          in correlation to the number of killed/ injured. Data shows that the larger the 
@@ -37,9 +39,8 @@ shinyUI(fluidPage(
          such as 9mm, 10mm, 40s&w, and .45 acp (listed as 45 auto) are less likely to kill and injured despite 
          being the most used within gun violence. Out of the 4 different shotgun calibers listed within the 
          datatables 16 gauge listed the highest on the killed chart while the .410 gauge listed the 
-         highest on the injured charts.", align = "left")
-      # img(src='guns.png', alt = "different gun types", align = "left")
-      # <img src = "imgs/guns.png", width="400", height="300", alt = "different gun types">
+         highest on the injured charts.", align = "left"),
+      img(src='guns.png', width = "550px", height = "300px", alt = "different gun types", align = "left")
     ),
     mainPanel(
        plotOutput("distPlot"),
