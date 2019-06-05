@@ -18,8 +18,8 @@ library(maps)
 library(R.utils)
 library(mapproj)
 
-data <- paste0("./complete.stage2.2017.csv")
-data <- read.csv(data, stringsAsFactors = F)
+#data <- paste0("./complete.stage2.2017.csv")
+data <- read.csv('./complete.stage2.2017.csv', stringsAsFactors = FALSE)
 
 gun_data <- select(data, gun_stolen, longitude, latitude, n_killed, n_injured) %>% 
   filter(latitude > 20 & latitude <50) %>% 
@@ -83,7 +83,7 @@ shinyServer(function(input, output) {
   
   output$text_2 <- renderText({
     paste('The data is as same as the upper data, gun violence that happened at 2017.
-          Percentage of killed and injured people in gun violence are higher when the stolen guns were used.
+          Percentage of killed and injured people in gun violence are higher when the stolen guns were used. 
           The percentage of killed people is more extreme than injured people when comparing whether the stolen guns were used or not ')
   })
   
