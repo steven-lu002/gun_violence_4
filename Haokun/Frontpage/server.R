@@ -33,6 +33,7 @@ teen_data <- filtered %>%
   filter(Teen == TRUE)
 child_data <- filtered %>%
   filter(Child == TRUE)
+
 gun_data <- select(data, gun_stolen, longitude, latitude, n_killed, n_injured) %>% 
   filter(latitude > 20 & latitude <50) %>% 
   filter(longitude < -69 & longitude > -132) 
@@ -41,6 +42,8 @@ gun_data$gun_stolen <- gsub(".*\\:","", gun_data$gun_stolen)
 stolen <- length(which(gun_data$gun_stolen == 'Stolen'))
 without_Unknown <- filter(gun_data, gun_stolen != 'Unknown') %>% 
   filter(gun_stolen != '')
+
+stage2 <- read.csv("question2.csv", stringsAsFactors = F)
 
 getCrimeCount <- function(data, city_or_state) {
   if (city_or_state == 'State') {
@@ -165,5 +168,34 @@ shinyServer(function(input, output) {
           who owns guns. I thought the coast sides of the United States are safer to live, but there were more
           stolen gun gun violence had happened. However, the data only shows 2017 data and the correlation 
           cannot tell causation, so my analysis does not result causation')
+  })
+  
+  output$distPlot <- renderPlot({
+    ggplot(stage2, aes(gun_type, 
+                       if(input$status == "Killed"){
+                         y = stage2$Killed
+                       } else {
+                         y = stage2$Injured
+                       }, fill = stage2$gun_type)) + 
+      geom_bar(stat = "identity") +
+      labs(y = paste0("Number of ", input$status), x = "Gun Types Used") +
+      ggtitle(paste0("Gun Type Versus ", input$status)) +
+      theme(axis.text=element_text(size = 7.8), axis.title=element_text(size = 20, face = "bold"), 
+            title = element_text(size = 25, face = "bold")) +
+      guides(fill=guide_legend(title = "Gun Types"))
+  })
+  output$mytable = renderDataTable({
+    #fail attempt to make colors in boxes
+    #brks <- quantile(df, probs = seq(.05, .95, .05), na.rm = TRUE)
+    #clrs <- (round(seq(255, 40, length.out = length(brks) + 1), 0) )#%>% {paste0("rgb(255,", ., ",", ., ")")})
+    
+    datatable(stage2, options = list(initComplete = JS(
+      "function(settings, json) {",
+      "$(this.api().table().header()).css({'background-color': '#000', 'color': '#fff'});",
+      "}")#formatStyle(names(stage2), backgroundColor = styleInterval(brks, clrs))
+    )
+    ) 
+    ###rounding?
+    
   })
 })
