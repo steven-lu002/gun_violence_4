@@ -44,6 +44,23 @@ UI = fluidPage(
     tabPanel(
       "State and City",
       titlePanel('Gun Violence by State and City'),
+      fluidRow(HTML(paste(
+        h3('Analysis'),
+        '</br>',
+        h4(
+          'In general most of the gun violence appears on the East Coast
+          of the United States. There is a notable lack in observations in
+          the mid west states. For Adults the Cities with the most amount
+          of occurences are famous for their violence: Chicago, Baltimore,
+          New Orleans, Saint Louis and Philadelphia. Chicago and Saint Louis are
+          the most violent throughout all age groups while the others drop in and out
+          depending on age. One interesting observation is that the state with the most gun
+          incidents with an Adult is California, which does not have a city in the
+          top 10 most violent. Three cities that do not get a lot of attentions but
+          showed a high amount of violence across age groups were Memphis, Houston,
+          and Milwaukee. The state with the highest amount of child incidents was Texas.'
+        )
+      ))),
       sidebarLayout(
         fluidRow(
           column(1),
@@ -73,24 +90,7 @@ UI = fluidPage(
                  )),
           column(12, dataTableOutput("table"))
         )
-      ),
-      fluidRow(HTML(paste(
-        h3('Analysis'),
-        '</br>',
-        h4(
-          'In general most of the gun violence appears on the East Coast
-          of the United States. There is a notable lack in observations in
-          the mid west states. For Adults the Cities with the most amount
-          of occurences are famous for their violence: Chicago, Baltimore,
-          New Orleans, Saint Louis and Philadelphia. Chicago and Saint Louis are
-          the most violent throughout all age groups while the others drop in and out
-          depending on age. One interesting observation is that the state with the most gun
-          incidents with an Adult is California, which does not have a city in the
-          top 10 most violent. Three cities that do not get a lot of attentions but
-          showed a high amount of violence across age groups were Memphis, Houston,
-          and Milwaukee. The state with the highest amount of child incidents was Texas.'
-        )
-        )))
+      )
         ),
     
     tabPanel("Stolen Weapons",
