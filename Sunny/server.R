@@ -70,11 +70,29 @@ shinyServer(function(input, output) {
   })
   
   output$text_1 <- renderText({
-    paste('The map shows the distrubution of stolen gun used in violence at U.S')
+    paste('This dot distribution shows the stolen gun data of gun violence happened at 2017.
+         The map shows the distrubution of stolen gun used in violence at U.S.
+          States like California, New York and Florida are experiencing the highest number of gun-related crimes as 
+          the distribution is densed.
+          In contrast, states like Oregon, Washington, and other Mid States are experiencing the lowest numbers
+          of gun-related criminal incidents as the dot distrubution is not densed.
+          We can see that hhe stolen guns are mostly distributed in the east side of United States.
+          Most of the gun violence that used stolen guns occured in coast side of the United States.
+          ')
   })
   
   output$text_2 <- renderText({
-    paste('Percentage of killed and injured people in gun violence are higher when the stolen guns were used')
+    paste('The data is as same as the upper data, gun violence that happened at 2017.
+          Percentage of killed and injured people in gun violence are higher when the stolen guns were used. 
+          The percentage of killed people is more extreme than injured people when comparing whether the stolen guns were used or not ')
+  })
+  
+  output$text_3 <- renderText({
+    paste('Looking and analysing the gun violence data of stolen guns could warn people and goverment of the 
+          regulation of the guns. The stolen guns causes more injured and killed people, so it can warn people
+          who owns guns. I thought the coast sides of the United States are safer to live, but there were more
+          stolen gun gun violence had happened. However, the data only shows 2017 data and the correlation 
+          cannot tell causation, so my analysis does not result causation')
   })
 })
 

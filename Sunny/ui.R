@@ -9,9 +9,10 @@
 
 library(shiny)
 
+library(shinythemes)
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
-  
+  theme = shinytheme("slate"),
   # Application title
   titlePanel("Stolen Gun around United States"),
   
@@ -24,16 +25,19 @@ shinyUI(fluidPage(
       hr(),
       fluidRow(
         column(3, verbatimTextOutput("value"))
-      )
+      ),
+      textOutput("text_1"),
+      hr(),
+      textOutput("text_2"),
+      hr(),
+      textOutput("text_3")
     ),
     
     # Show a plot of the generated distribution
     mainPanel(
        plotOutput("gun_stolen_plot"),
-       textOutput("text_1"),
        plotOutput("gun_stolen_plot2"),
-       plotOutput("gun_stolen_plot3"),
-       textOutput("text_2")
+       plotOutput("gun_stolen_plot3")
     )
   )
 ))
