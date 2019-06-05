@@ -8,6 +8,7 @@ library(maps)
 library(R.utils)
 library(mapproj)
 
+# Data wrangling
 data <-
   read.csv('./complete.stage2.2017.csv', stringsAsFactors = FALSE)
 filtered <- data %>%
@@ -29,6 +30,7 @@ teen_data <- filtered %>%
 child_data <- filtered %>%
   filter(Child == TRUE)
 
+# More Data wrangling
 gun_data <-
   select(data, gun_stolen, longitude, latitude, n_killed, n_injured) %>%
   filter(latitude > 20 & latitude < 50) %>%
@@ -41,6 +43,7 @@ without_Unknown <- filter(gun_data, gun_stolen != 'Unknown') %>%
 
 stage2 <- read.csv("question2.csv", stringsAsFactors = F)
 
+# Data wrangling function
 getCrimeCount <- function(data, city_or_state) {
   if (city_or_state == 'State') {
     data <- data %>%
@@ -60,6 +63,7 @@ getCrimeCount <- function(data, city_or_state) {
   }
 }
 
+# Another data wrangling function
 shinyServer(function(input, output) {
   getMapType <- reactive({
     if (input$radio == 'adult') {
@@ -71,6 +75,7 @@ shinyServer(function(input, output) {
     }
   })
   
+  # Reactive data wrangling
   getTableType <- reactive({
     if (input$radio == 'adult') {
       data <- adult_data
@@ -91,12 +96,14 @@ shinyServer(function(input, output) {
     
   })
   
+  # Plot of a World Map (Focused in US) of leaflet of gun violence occurences
   output$plot <- renderLeaflet({
     leaflet(getMapType()) %>% addTiles() %>% addCircles(lng =  ~ longitude,
                                                         lat =  ~ latitude,
                                                         color = 'red')
   })
   
+  # Data table for leaflet
   output$table <- renderDataTable({
     getTableType()
   })
@@ -115,6 +122,7 @@ shinyServer(function(input, output) {
       coord_map()
   })
   
+  # Plot of US of stolen guns
   output$gun_stolen_plot2 <- renderPlot({
     ggplot(without_Unknown,
            aes(gun_stolen,
@@ -131,6 +139,7 @@ shinyServer(function(input, output) {
       guides(fill = guide_legend(title = "Stolen Guns - Killed people"))
   })
   
+  # Bar graph about stolen guns
   output$gun_stolen_plot3 <- renderPlot({
     ggplot(
       without_Unknown,
@@ -149,6 +158,7 @@ shinyServer(function(input, output) {
       guides(fill = guide_legend(title = "Stolen Guns - Injured people"))
   })
   
+  # Analysis for Stolen weapons
   output$text_1 <- renderText({
     paste(
       'This dot distribution shows the stolen gun data of gun violence happened at 2017.
@@ -163,6 +173,7 @@ shinyServer(function(input, output) {
     )
   })
   
+  # More analysis for stolen weapons
   output$text_2 <- renderText({
     paste(
       'The data is as same as the upper data, gun violence that happened at 2017.
@@ -171,6 +182,7 @@ shinyServer(function(input, output) {
     )
   })
   
+  # Final analysis for stolen weapons
   output$text_3 <- renderText({
     paste(
       'Looking and analysing the gun violence data of stolen guns could warn people and goverment of the
@@ -181,6 +193,7 @@ shinyServer(function(input, output) {
     )
   })
   
+  # Bar graph for gun type and injuries
   output$distPlot <- renderPlot({
     ggplot(stage2, aes(gun_type,
                        if (input$status == "Killed") {
@@ -198,6 +211,8 @@ shinyServer(function(input, output) {
       ) +
       guides(fill = guide_legend(title = "Gun Types"))
   })
+  
+  # Data table for the plot
   output$mytable = renderDataTable({
     datatable(stage2, options = list(
       initComplete = JS(
@@ -207,6 +222,8 @@ shinyServer(function(input, output) {
       )
     ))
   })
+  
+  # Introduction of the project
   output$introduction <- renderText({
     paste(
       'The dataset that we are going to use is from a github repo containing csv files on gun violence.
