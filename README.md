@@ -3,7 +3,8 @@
 ## Sunny Lee, Nicola Beirer, Steven Lu, Haokun Cai
 
 ## 14 May 2019
-
+### Link to ShinyApp! :-)
+[Link to ShinyApp](https://stevenlu002.shinyapps.io/Frontpage/)
 ### Project Description
 #### Dataset
 The dataset that we are going to use is from a github repo containing csv files on gun violence. This data is collected from [gun violence archives](https://www.gunviolencearchive.org/) and can be accessed from the csv files located on the [repo](https://github.com/jamesqo/gun-violence-data). This data was collected through the use of python scripts in order to sort and clean the data. The filters include things such as incident, location, date, gun type, etc.
