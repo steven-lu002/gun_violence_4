@@ -1,0 +1,12 @@
+{
+  "summary": {
+    "title": "Info 201 Project Threat Model",
+    "owner": "Steven Lu",
+    "description": "webapp that analyzes data to create visualizations"
+  },
+  "detail": {
+    "contributors": [],
+    "diagrams": [],
+    "reviewer": "Steven Lu"
+  }
+}
