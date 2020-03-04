@@ -5,8 +5,18 @@
     "description": "webapp that analyzes data to create visualizations"
   },
   "detail": {
-    "contributors": [],
-    "diagrams": [],
+    "contributors": [
+      {
+        "name": "ex"
+      }
+    ],
+    "diagrams": [
+      {
+        "title": "ex",
+        "thumbnail": "./public/content/images/thumbnail.jpg",
+        "id": 0
+      }
+    ],
     "reviewer": "Steven Lu"
   }
 }
